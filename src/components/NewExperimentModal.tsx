@@ -11,17 +11,12 @@ const NewExperimentModal = ({ isModalOpen, handleToggleModal }: NewExperimentMod
   const [description, setDescription] = useState<string>();
 
   const createExperiment = async () => {
-    // console.log(description, title);
     handleToggleModal();
 
     try {
-      // await axios.post("/api/experiment/create", {
-      //   title: title,
-      //   description: description,
-      // });
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/experiment/create`, {
+      await fetch(`/api/experiment/create`, {
         method: "POST",
-        body: JSON.stringify({ title: title, description: description, user: "test", config: "" }), // TODO: add config and user
+        body: JSON.stringify({ title: title, description: description }),
       });
     } catch (error) {
       console.log(error);
@@ -65,10 +60,10 @@ const NewExperimentModal = ({ isModalOpen, handleToggleModal }: NewExperimentMod
               sx={{ margin: 1 }}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <Button variant="contained" component="label" sx={{ margin: 1 }}>
+            {/* <Button variant="contained" component="label" sx={{ margin: 1 }}>
               Upload Config File
               <input type="file" hidden />
-            </Button>
+            </Button> */}
             <Box sx={{ margin: 1 }}>
               <Button
                 variant="contained"
