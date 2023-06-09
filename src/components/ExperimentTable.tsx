@@ -21,7 +21,7 @@ const columns: GridColDef[] = [
     },
   },
   { field: "owner", headerName: "Owner", flex: 1, sortable: false },
-  { field: "permission", headerName: "Permission", flex: 1, sortable: false },
+  // { field: "permission", headerName: "Permission", flex: 1, sortable: false },
   { field: "lastModified", headerName: "Last Modified", flex: 1 },
   { field: "created", headerName: "Created", flex: 1 },
 ];

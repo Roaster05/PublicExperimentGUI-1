@@ -9,7 +9,7 @@ interface ExperimentTableRow {
   id: string;
   title: string;
   owner: string;
-  permission: string;
+  // permission: string;
   lastModified: string;
   created: string;
 }

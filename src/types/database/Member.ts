@@ -7,4 +7,4 @@ const memberSchema = new mongoose.Schema({
   },
 });
 
-export const Iteration = mongoose.models.modelName || mongoose.model("Iteration", memberSchema);
+export const Iteration = mongoose.models.Members || mongoose.model("Iteration", memberSchema);

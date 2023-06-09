@@ -26,4 +26,4 @@ const experimentSchema = new mongoose.Schema({
 });
 
 export const Experiment =
-  mongoose.models.modelName || mongoose.model("Experiment", experimentSchema);
+  mongoose.models.Experiment || mongoose.model("Experiment", experimentSchema);

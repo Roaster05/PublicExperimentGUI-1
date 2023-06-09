@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { set } from "mongoose";
 
 interface NewExperimentModalProps {
   isModalOpen: boolean;
   handleToggleModal: () => void;
+  setIsCreateNew: (isCreateNew: boolean) => void;
 }
 
-const NewExperimentModal = ({ isModalOpen, handleToggleModal }: NewExperimentModalProps) => {
+const NewExperimentModal = ({
+  isModalOpen,
+  handleToggleModal,
+  setIsCreateNew,
+}: NewExperimentModalProps) => {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
 
@@ -21,6 +27,7 @@ const NewExperimentModal = ({ isModalOpen, handleToggleModal }: NewExperimentMod
     } catch (error) {
       console.log(error);
     }
+    setIsCreateNew(true);
   };
   return (
     <Modal open={isModalOpen} onClose={handleToggleModal}>

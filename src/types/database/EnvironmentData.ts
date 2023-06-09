@@ -54,4 +54,4 @@ const environmentDataSchema = new mongoose.Schema({
 });
 
 export const EnvironmentData =
-  mongoose.models.modelName || mongoose.model("EnvironmentData", environmentDataSchema);
+  mongoose.models.EnvironmentData || mongoose.model("EnvironmentData", environmentDataSchema);

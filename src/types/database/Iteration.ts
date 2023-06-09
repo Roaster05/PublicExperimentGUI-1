@@ -42,4 +42,4 @@ const iterationSchema = new mongoose.Schema({
   },
 });
 
-export const Iteration = mongoose.models.modelName || mongoose.model("Iteration", iterationSchema);
+export const Iteration = mongoose.models.Iteration || mongoose.model("Iteration", iterationSchema);
