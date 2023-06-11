@@ -5,7 +5,10 @@ export async function GET(req: Request, res: Response) {
   await dbConnect();
 
   try {
-    const dbExperiments = await Experiment.find({});
+    const dbExperiments = await Experiment.find(
+      {},
+      { title: 1, description: 1, owner: 1, lastModified: 1, createdAt: 1 }
+    );
 
     return new Response(
       JSON.stringify({
@@ -15,7 +18,7 @@ export async function GET(req: Request, res: Response) {
           title: dbExperiment.title,
           description: dbExperiment.description,
           owner: dbExperiment.owner, // TODO: change to owner
-          lastModified: dbExperiment.createdAt, // TODO: change to lastModified
+          lastModified: dbExperiment.lastModified,
           created: dbExperiment.createdAt,
         })),
         // experiments: dbExperiments,

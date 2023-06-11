@@ -1,9 +1,12 @@
 import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
+import ExperimentTableToolbar from "./ExperimentTableToolbar";
 
 interface Props {
   rows: ExperimentTableRow[];
+  handleDelete: () => void;
+  handleToggleModal: () => void;
 }
 
 const columns: GridColDef[] = [
@@ -21,30 +24,48 @@ const columns: GridColDef[] = [
     },
   },
   { field: "owner", headerName: "Owner", flex: 1, sortable: false },
-  // { field: "permission", headerName: "Permission", flex: 1, sortable: false },
-  { field: "lastModified", headerName: "Last Modified", flex: 1 },
-  { field: "created", headerName: "Created", flex: 1 },
+  {
+    field: "lastModified",
+    headerName: "Last Modified",
+    flex: 1,
+    valueFormatter: (params) => params.value.slice(0, 10),
+  },
+  {
+    field: "created",
+    headerName: "Created",
+    flex: 1,
+    valueFormatter: (params) => params.value.slice(0, 10),
+  },
 ];
 
-const ExperimentTable = ({ rows }: Props) => {
+const ExperimentTable = ({ rows, handleDelete, handleToggleModal }: Props) => {
+  const [rowsSelctedIds, setRowsSelectedIds] = React.useState<String[]>([]);
   return (
     <div style={{ width: "100%" }}>
-      {rows.length > 5 ? (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          getRowId={(row: any) => row.id}
-        />
-      ) : (
-        <DataGrid rows={rows} columns={columns} hideFooter={true} getRowId={(row: any) => row.id} />
-      )}
+      <ExperimentTableToolbar
+        rowsSelctedIds={rowsSelctedIds}
+        handleDelete={handleDelete}
+        handleToggleModal={handleToggleModal}
+      />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+          sorting: {
+            sortModel: [{ field: "lastModified", sort: "desc" }],
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        onRowSelectionModelChange={(ids) => {
+          const selectedIds = ids.map((id) => String(id));
+          setRowsSelectedIds(selectedIds);
+        }}
+        getRowId={(row: any) => row.id}
+      />
     </div>
   );
 };

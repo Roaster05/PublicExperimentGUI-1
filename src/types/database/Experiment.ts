@@ -16,6 +16,10 @@ const experimentSchema = new mongoose.Schema({
       ref: "Member",
     },
   ],
+  lastModified: {
+    type: Date,
+    default: Date.now,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
