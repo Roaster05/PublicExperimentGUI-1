@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
-const iterationSchema = new mongoose.Schema({
-  RunName: {
+export const iterationSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Member",
-  },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Member",
+  // },
   timestamp: {
     startTime: {
       type: Date,
@@ -42,4 +42,4 @@ const iterationSchema = new mongoose.Schema({
   },
 });
 
-export const Iteration = mongoose.models.Iteration || mongoose.model("Iteration", iterationSchema);
+// export const Iteration = mongoose.models.Iteration || mongoose.model("Iteration", iterationSchema);

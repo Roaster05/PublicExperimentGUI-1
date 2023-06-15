@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Iteration } from "./Iteration";
+import { iterationSchema } from "./Iteration";
 
 const experimentSchema = new mongoose.Schema({
   title: {
@@ -8,7 +8,7 @@ const experimentSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   members: [
     {
@@ -25,7 +25,7 @@ const experimentSchema = new mongoose.Schema({
     default: Date.now,
   },
   iterations: {
-    type: [Iteration.schema],
+    type: [iterationSchema],
   },
 });
 
