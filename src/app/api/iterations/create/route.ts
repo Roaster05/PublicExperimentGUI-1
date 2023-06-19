@@ -10,7 +10,7 @@ export async function POST(req: Request, res: Response) {
     .object({
       experimentTitle: z.string(),
       iterationTitle: z.string(),
-      description: z.string().nullable(),
+      description: z.string().nullish()
     })
     .parse(body);
 
@@ -67,12 +67,8 @@ export async function POST(req: Request, res: Response) {
         stopTime: "",
       },
       input: {
-        configuration: {},
-        data: {},
       },
       output: {
-        configuration: {},
-        data: {},
       },
     };
     existingExperiment.iterations.push(newIteration);

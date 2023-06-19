@@ -1,45 +1,19 @@
 import mongoose from "mongoose";
 
-const configSchema = new mongoose.Schema({
-  command: {
-    type: String,
-    required: true,
-  },
-  interval: {
-    type: Number,
-    required: true,
-  },
-  metrics: {
-    type: [String],
-  },
-});
-
-const Config = mongoose.model("Config", configSchema);
-
-const metricSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  value: {
-    type: Number || String,
-  },
-});
-const Metric = mongoose.model("MetricSchema", metricSchema);
-
 const timeSeriesSchema = new mongoose.Schema({
   timestamp: {
     type: Date,
     required: true,
   },
-  metrics: {
-    type: [Metric.schema],
+  val: {
+    type: Number || String,
+    required: true,
   },
 });
 
-const TimeSeries = mongoose.model("TimeSeries", timeSeriesSchema);
+// const TimeSeries = mongoose.model("TimeSeries", timeSeriesSchema);
 
-const environmentDataSchema = new mongoose.Schema({
+export const environmentDataSchema = new mongoose.Schema({
   command: {
     type: String,
     required: true,
@@ -48,10 +22,10 @@ const environmentDataSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  metrics: {
-    type: [TimeSeries.schema],
+  record: {
+    type: [timeSeriesSchema],
   },
 });
 
-export const EnvironmentData =
-  mongoose.models.EnvironmentData || mongoose.model("EnvironmentData", environmentDataSchema);
+// export const EnvironmentData =
+//   mongoose.models.EnvironmentData || mongoose.model("EnvironmentData", environmentDataSchema);
