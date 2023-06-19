@@ -1,13 +1,28 @@
 import { spawn } from "child_process";
+import { z } from "zod";
 
 let monitorProcess = global.monitorProcess;
 
 export async function POST(req: Request, res: Response) {
+  const body = await req.json();
+
+  const { experimentTitle, iterationTitle, interval } = z
+    .object({
+      experimentTitle: z.string(),
+      iterationTitle: z.string(),
+      interval: z.string(),
+    })
+    .parse(body);
+
   if (!monitorProcess) {
-    monitorProcess = global.monitorProcess = spawn("ts-node", ["src/helper/monitor.ts"], {
-      detached: true,
-      stdio: "inherit",
-    });
+    monitorProcess = global.monitorProcess = spawn(
+      "ts-node",
+      ["src/helper/monitor.ts", experimentTitle, iterationTitle, interval],
+      {
+        detached: true,
+        stdio: "inherit",
+      }
+    );
     monitorProcess.unref();
     return new Response(
       JSON.stringify({
@@ -19,7 +34,7 @@ export async function POST(req: Request, res: Response) {
     );
   } else {
     JSON.stringify({
-      message: "Monitor started",
+      message: "Already in monitor",
     }),
       {
         status: 200,

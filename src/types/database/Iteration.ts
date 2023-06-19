@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { environmentDataSchema } from "./EnvironmentData";
 
 export const iterationSchema = new mongoose.Schema({
   name: {
@@ -36,8 +37,7 @@ export const iterationSchema = new mongoose.Schema({
       type: String,
     },
     EnvironmentData: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "EnvironmentData",
+      type: [environmentDataSchema],
     },
   },
 });
